@@ -7,24 +7,42 @@
 //
 
 import UIKit
+
 import LFLiveKit
 
-class BroadcastViewController: UIViewController {
+class BroadcastViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     
-
     @IBOutlet weak var streamSwitch: UISwitch!
     @IBOutlet weak var infoLabel: UILabel!
     @IBOutlet weak var previewView : UIView!
     @IBOutlet weak var platformLabel: UILabel!
     @IBOutlet weak var platformSwitch: UISwitch!
+    @IBOutlet weak var watchLink: UIButton!
+    @IBOutlet weak var currentQualityTextField: UITextField!
     
+    let qualityPicker = UIPickerView()
     var streamKey = random()
     var prometheanServerURL = ""
+    var prometheanWatchLink = "http://34.212.12.131:5000/state"
+    var youTubeWatchLink = "https://www.youtube.com/channel/UCBdtpwW8S7G7JIE4eBNBDBQ"
     var serverURL = ""
+    
+    var outputQuality = (name: "medium3", setting: LFLiveVideoQuality.medium3)
+    
+    var encodeSettings: [(name : String, setting: LFLiveVideoQuality)] =
+        [   ("Low1", LFLiveVideoQuality.low1),
+            ("Low2", LFLiveVideoQuality.low2),
+            ("Low3", LFLiveVideoQuality.low3),
+            ("Medium 1", LFLiveVideoQuality.medium1),
+            ("Medium 2", LFLiveVideoQuality.medium2),
+            ("Medium 3", LFLiveVideoQuality.medium3),
+            ("High 1", LFLiveVideoQuality.high1),
+            ("High 2", LFLiveVideoQuality.high2),
+            ("High 3", LFLiveVideoQuality.high3)]
     
     lazy var session: LFLiveSession = {
         let audioConfiguration = LFLiveAudioConfiguration.default()
-        let videoConfiguration = LFLiveVideoConfiguration.defaultConfiguration(for: .medium3)
+        let videoConfiguration = LFLiveVideoConfiguration.defaultConfiguration(for: outputQuality.setting)
         
         let session = LFLiveSession(audioConfiguration: audioConfiguration, videoConfiguration: videoConfiguration)!
         session.delegate = self
@@ -48,7 +66,30 @@ class BroadcastViewController: UIViewController {
         self.view.backgroundColor = UIColor(red: 23/255, green:53/255, blue: 97/255, alpha: 1)
         self.prometheanServerURL = "rtmp://34.212.12.131/live/\(streamKey)"
         self.serverURL = prometheanServerURL
-        // Do any additional setup after loading the view, typically from a nib.
+        self.watchLink.setTitle(prometheanWatchLink, for: .normal)
+        currentQualityTextField.inputView = qualityPicker
+        qualityPicker.delegate = self
+        currentQualityTextField.text = outputQuality.name
+    }
+    
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return encodeSettings.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return encodeSettings[row].name
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        outputQuality = encodeSettings[row]
+        currentQualityTextField.text=encodeSettings[row].name
+        currentQualityTextField.resignFirstResponder()
+        session.stopLive()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -72,16 +113,27 @@ class BroadcastViewController: UIViewController {
     @IBAction func switchPlatform(_ sender: Any) {
         if platformSwitch.isOn{
             platformLabel.text = "Promethean"
-//            serverURL = "rtmp://34.212.12.131/live/foobah2"
             serverURL = prometheanServerURL
+            self.watchLink.setTitle(prometheanWatchLink, for: .normal)
         }
         else{
             platformLabel.text = "YouTube"
             serverURL = "rtmp://a.rtmp.youtube.com/live2/99cu-uuf8-w2zx-9rrs"
+            self.watchLink.setTitle(youTubeWatchLink, for: .normal)
             
         }
     }
-
+    
+    @IBAction func watchLinkClicked(_ sender: Any) {
+        if let url = URL(string: watchLink.currentTitle!){
+            UIApplication.shared.open(url, options: [:], completionHandler: {
+                (success) in
+                print("Opened")
+                })
+        }
+        
+    }
+    
 }
 
 extension BroadcastViewController: LFLiveSessionDelegate {
@@ -95,9 +147,9 @@ extension BroadcastViewController: LFLiveSessionDelegate {
         case .ready:
             infoLabel.text = "ready"
         case.start:
-            infoLabel.text = "start"
+            infoLabel.text = "streaming!"
         case.stop:
-            infoLabel.text = "stop"
+            infoLabel.text = "stopped"
         case .refresh:
             infoLabel.text = "refreshing"
         }

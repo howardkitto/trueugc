@@ -63,7 +63,6 @@ class BroadcastViewController: UIViewController, UIPickerViewDelegate, UIPickerV
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = UIColor(red: 23/255, green:53/255, blue: 97/255, alpha: 1)
         self.prometheanServerURL = "rtmp://34.212.12.131/live/\(streamKey)"
         self.serverURL = prometheanServerURL
         self.watchLink.setTitle(prometheanWatchLink, for: .normal)

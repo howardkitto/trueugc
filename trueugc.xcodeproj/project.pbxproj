@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		02B994941FE1265F00446BCC /* HomeListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B994931FE1265F00446BCC /* HomeListViewController.swift */; };
 		02BD2C571FDADAB800BAD741 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02BD2C561FDADAB800BAD741 /* AppDelegate.swift */; };
 		02BD2C591FDADAB800BAD741 /* BroadcastViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02BD2C581FDADAB800BAD741 /* BroadcastViewController.swift */; };
 		02BD2C5C1FDADAB800BAD741 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 02BD2C5A1FDADAB800BAD741 /* Main.storyboard */; };
@@ -37,6 +38,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		02B994931FE1265F00446BCC /* HomeListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeListViewController.swift; sourceTree = "<group>"; };
 		02BD2C531FDADAB800BAD741 /* trueugc.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = trueugc.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		02BD2C561FDADAB800BAD741 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		02BD2C581FDADAB800BAD741 /* BroadcastViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BroadcastViewController.swift; sourceTree = "<group>"; };
@@ -116,6 +118,7 @@
 			children = (
 				02BD2C561FDADAB800BAD741 /* AppDelegate.swift */,
 				02BD2C581FDADAB800BAD741 /* BroadcastViewController.swift */,
+				02B994931FE1265F00446BCC /* HomeListViewController.swift */,
 				02BD2C5A1FDADAB800BAD741 /* Main.storyboard */,
 				02BD2C5D1FDADAB800BAD741 /* Assets.xcassets */,
 				02BD2C5F1FDADAB800BAD741 /* LaunchScreen.storyboard */,
@@ -440,10 +443,12 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-trueugc/Pods-trueugc-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/LFLiveKit/LFLiveKit.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LFLiveKit.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -458,6 +463,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				02B994941FE1265F00446BCC /* HomeListViewController.swift in Sources */,
 				02BD2C591FDADAB800BAD741 /* BroadcastViewController.swift in Sources */,
 				02BD2C571FDADAB800BAD741 /* AppDelegate.swift in Sources */,
 			);

@@ -9,12 +9,22 @@
 import UIKit
 
 struct Video: Decodable {
-    let id : String?
+    let _id : String?
     let title: String?
+    let liveFeeds: [LiveFeed]?
+}
+
+struct LiveFeed: Decodable {
+    let _id: String?
+    let label: String?
+    let m3u8Url: String?
 }
 
 
 class HomeListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
+    
+    var videos = [Video]()
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection: Int )-> Int{
         return videos.count
     }
@@ -25,19 +35,29 @@ class HomeListViewController: UIViewController, UITableViewDelegate, UITableView
             cell.textLabel?.text = videos[indexPath.row].title
             return cell
     }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "playVideo", sender: self)
+    }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let destination = segue.destination as? VideoPlayViewController{
+            destination.video = videos[(videoList.indexPathForSelectedRow?.row)!]
+        }
+    }
     
     
     @IBOutlet weak var videoList: UITableView!
     
-    var videos = [Video]()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        func downloadJSON(completed: @escaping () -> ()){
-            let url = URL(string: "https://api.overloop.io/org/true/search-videos?search=game&videoType=live")
+        var videoQuery = "videoType=Live"
         
+//      var videoQuery = "videoType=Live&liveStreamStatus=Live"
+        
+        func downloadJSON(completed: @escaping () -> ()){
+            let url = URL(string: "https://api.overloop.io/org/true/videos?\(videoQuery)")
+            
             URLSession.shared.dataTask(with: url!) { (data, response, error) in
                 if error == nil {
                     do{

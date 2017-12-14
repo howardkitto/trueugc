@@ -17,14 +17,14 @@ class BroadcastViewController: UIViewController, UIPickerViewDelegate, UIPickerV
     @IBOutlet weak var previewView : UIView!
     @IBOutlet weak var platformLabel: UILabel!
     @IBOutlet weak var platformSwitch: UISwitch!
-    @IBOutlet weak var watchLink: UIButton!
+    
+    @IBOutlet weak var watchLink: UILabel!
+    
     @IBOutlet weak var currentQualityTextField: UITextField!
     
     let qualityPicker = UIPickerView()
     var streamKey = random()
     var prometheanServerURL = ""
-    var prometheanWatchLink = "http://34.212.12.131:5000/state"
-    var youTubeWatchLink = "https://www.youtube.com/channel/UCBdtpwW8S7G7JIE4eBNBDBQ"
     var serverURL = ""
     
     var outputQuality = (name: "medium3", setting: LFLiveVideoQuality.medium3)
@@ -65,7 +65,6 @@ class BroadcastViewController: UIViewController, UIPickerViewDelegate, UIPickerV
         super.viewDidLoad()
         self.prometheanServerURL = "rtmp://34.212.12.131/live/\(streamKey)"
         self.serverURL = prometheanServerURL
-        self.watchLink.setTitle(prometheanWatchLink, for: .normal)
         currentQualityTextField.inputView = qualityPicker
         qualityPicker.delegate = self
         currentQualityTextField.text = outputQuality.name
@@ -113,24 +112,11 @@ class BroadcastViewController: UIViewController, UIPickerViewDelegate, UIPickerV
         if platformSwitch.isOn{
             platformLabel.text = "Promethean"
             serverURL = prometheanServerURL
-            self.watchLink.setTitle(prometheanWatchLink, for: .normal)
         }
         else{
             platformLabel.text = "YouTube"
             serverURL = "rtmp://a.rtmp.youtube.com/live2/99cu-uuf8-w2zx-9rrs"
-            self.watchLink.setTitle(youTubeWatchLink, for: .normal)
-            
         }
-    }
-    
-    @IBAction func watchLinkClicked(_ sender: Any) {
-        if let url = URL(string: watchLink.currentTitle!){
-            UIApplication.shared.open(url, options: [:], completionHandler: {
-                (success) in
-                print("Opened")
-                })
-        }
-        
     }
     
 }

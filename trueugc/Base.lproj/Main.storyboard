@@ -13,7 +13,6 @@
         <!--Video List-->
         <scene sceneID="GZA-jI-Fw0">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="amh-Ki-Txt" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="50R-em-PX1" customClass="HomeListViewController" customModule="trueugc" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ZrG-9M-GjU">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
@@ -44,7 +43,7 @@
                     <navigationItem key="navigationItem" title="Video List" id="JIM-CE-YCS">
                         <barButtonItem key="rightBarButtonItem" title="Broadcast" id="Tb5-7L-N2C">
                             <connections>
-                                <segue destination="BYZ-38-t0r" kind="show" id="dLG-6d-DJi"/>
+                                <segue destination="cLn-mK-0wu" kind="show" id="Rtz-Sf-Qe6"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -53,6 +52,7 @@
                         <segue destination="cx6-l5-3yT" kind="show" identifier="playVideo" id="Z6r-sU-nIm"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="amh-Ki-Txt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-348" y="-456.52173913043481"/>
         </scene>
@@ -159,6 +159,66 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1399" y="302"/>
+        </scene>
+        <!--New Video View Controller-->
+        <scene sceneID="4Cc-0W-qRN">
+            <objects>
+                <viewController id="cLn-mK-0wu" customClass="NewVideoViewController" customModule="trueugc" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Ato-DL-0rN" customClass="New">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gwY-dn-eht">
+                                <rect key="frame" x="120" y="87" width="274" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JEC-um-Wo4">
+                                <rect key="frame" x="20" y="92" width="42" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ofF-iJ-TeN">
+                                <rect key="frame" x="170" y="172" width="75" height="47"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Submit">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="postNewVideo:" destination="cLn-mK-0wu" eventType="touchUpInside" id="vgO-av-LTF"/>
+                                </connections>
+                            </button>
+                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ooa-74-EeI">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <items>
+                                    <navigationItem title="Create New Video" id="BnV-VJ-14b"/>
+                                </items>
+                            </navigationBar>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="46r-1l-i2C">
+                                <rect key="frame" x="120" y="136" width="274" height="28"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="0.090196078430000007" green="0.2156862745" blue="0.3803921569" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <viewLayoutGuide key="safeArea" id="C4Q-GX-9M5"/>
+                    </view>
+                    <connections>
+                        <outlet property="titleTextBox" destination="gwY-dn-eht" id="lNr-vb-tLK"/>
+                        <outlet property="validationMessage" destination="46r-1l-i2C" id="Fop-w8-ah9"/>
+                        <segue destination="BYZ-38-t0r" kind="show" identifier="startBroadcast" id="d7i-Aq-YH6"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="am7-sE-PSW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="540.57971014492762" y="301.63043478260875"/>
         </scene>

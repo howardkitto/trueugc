@@ -22,8 +22,9 @@ class BroadcastViewController: UIViewController, UIPickerViewDelegate, UIPickerV
     
     @IBOutlet weak var currentQualityTextField: UITextField!
     
+    var newVideo:NewVideo?
+    
     let qualityPicker = UIPickerView()
-    var streamKey = random()
     var prometheanServerURL = ""
     var serverURL = ""
     
@@ -63,11 +64,16 @@ class BroadcastViewController: UIViewController, UIPickerViewDelegate, UIPickerV
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.prometheanServerURL = "rtmp://34.212.12.131/live/\(streamKey)"
+        let streamKey: String? = newVideo?._id!
+        
+        self.prometheanServerURL = "rtmp://34.212.12.131/live/\(String(describing: streamKey!))"
+//        self.prometheanServerURL = "rtmp://34.212.12.131/live/holymoly"
         self.serverURL = prometheanServerURL
         currentQualityTextField.inputView = qualityPicker
         qualityPicker.delegate = self
         currentQualityTextField.text = outputQuality.name
+        print("got this \(String(describing: newVideo))")
+        watchLink.text = newVideo?.title
     }
     
     
@@ -98,9 +104,14 @@ class BroadcastViewController: UIViewController, UIPickerViewDelegate, UIPickerV
     
     @IBAction func switchStream(_ sender: Any) {
         if streamSwitch.isOn{
-            let stream = LFLiveStreamInfo()
-            stream.url = serverURL
-            session.startLive(stream)
+            
+            if newVideo?._id == ""{
+                print("error")
+            }
+            else{
+                let stream = LFLiveStreamInfo()
+                stream.url = serverURL
+                session.startLive(stream)}
         }
         else{
             session.stopLive()

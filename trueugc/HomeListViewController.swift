@@ -8,13 +8,13 @@
 
 import UIKit
 
-struct Video: Decodable {
+struct Video: Codable {
     let _id : String?
     let title: String?
     let liveFeeds: [LiveFeed]?
 }
 
-struct LiveFeed: Decodable {
+struct LiveFeed: Codable {
     let _id: String?
     let label: String?
     let m3u8Url: String?
@@ -62,7 +62,7 @@ class HomeListViewController: UIViewController, UITableViewDelegate, UITableView
                 if error == nil {
                     do{
                         self.videos = try JSONDecoder().decode([Video].self, from: data!)
-                        print(self.videos)
+//                        print(self.videos)
                         DispatchQueue.main.async {
                             completed()
                         }                    }

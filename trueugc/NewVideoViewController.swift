@@ -11,6 +11,8 @@ import UIKit
 struct NewVideo: Codable {
     var _id: String?
     var title: String?
+    var videoType: String?
+    var status: String?
 }
 
 class NewVideoViewController: UIViewController {
@@ -31,6 +33,8 @@ class NewVideoViewController: UIViewController {
     func submitNewVideo(videoTitle: String, completion:((Error?) -> Void)?) {
         
         self.userEnteredData.title = videoTitle
+        self.userEnteredData.videoType = "Live"
+        self.userEnteredData.status = "Live"
         
         var urlComponents = URLComponents()
             urlComponents.scheme = "https"

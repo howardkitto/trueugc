@@ -25,7 +25,7 @@ class VideoPlayViewController: UIViewController {
         
         VideoTitle.text = video?.title
         
-        streamUrl.text = video?.liveFeeds![0].m3u8Url
+//        streamUrl.text = video?.liveFeeds![0].m3u8Url
 
     }
 

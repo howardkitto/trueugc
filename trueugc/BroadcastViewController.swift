@@ -22,7 +22,7 @@ class BroadcastViewController: UIViewController, UIPickerViewDelegate, UIPickerV
     
     @IBOutlet weak var currentQualityTextField: UITextField!
     
-    var newVideo:NewVideo?
+    var newVideo:Video?
     
     let qualityPicker = UIPickerView()
     var prometheanServerURL = ""

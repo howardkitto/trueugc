@@ -8,12 +8,6 @@
 
 import UIKit
 
-struct NewVideo: Codable {
-    var _id: String?
-    var title: String?
-    var videoType: String?
-    var status: String?
-}
 
 class NewVideoViewController: UIViewController {
     
@@ -21,8 +15,8 @@ class NewVideoViewController: UIViewController {
     
     @IBOutlet weak var validationMessage: UILabel!
     
-    var userEnteredData = NewVideo()
-    var returnedData = NewVideo()
+    var userEnteredData = Video()
+    var returnedData = Video()
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let destination = segue.destination as? BroadcastViewController{
@@ -35,6 +29,7 @@ class NewVideoViewController: UIViewController {
         self.userEnteredData.title = videoTitle
         self.userEnteredData.videoType = "Live"
         self.userEnteredData.status = "Live"
+        
         
         var urlComponents = URLComponents()
             urlComponents.scheme = "https"
@@ -77,7 +72,7 @@ class NewVideoViewController: UIViewController {
             
             // APIs usually respond with the data you just sent in your POST request
             if let data = responseData{
-                self.returnedData = try! JSONDecoder().decode(NewVideo.self, from: data)
+                self.returnedData = try! JSONDecoder().decode(Video.self, from: data)
                 print("that is it \(self.returnedData)")
                 DispatchQueue.main.async {
                     self.performSegue(withIdentifier: "startBroadcast", sender: self)

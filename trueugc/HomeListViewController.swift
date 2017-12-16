@@ -9,15 +9,18 @@
 import UIKit
 
 struct Video: Codable {
-    let _id : String?
-    let title: String?
-    let liveFeeds: [LiveFeed]?
+    var _id : String?
+    var title: String?
+    var videoType: String?
+    var status: String?
+    var exploitationDate: String?
+    var liveFeeds: [LiveFeed]?
 }
 
 struct LiveFeed: Codable {
-    let _id: String?
-    let label: String?
-    let m3u8Url: String?
+    var _id: String?
+    var label: String?
+    var m3u8Url: String?
 }
 
 
@@ -48,18 +51,18 @@ class HomeListViewController: UIViewController, UITableViewDelegate, UITableView
     
     @IBOutlet weak var videoList: UITableView!
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    func getListData(){
         
         var videoQuery = "videoType=Live"
         
-//      var videoQuery = "videoType=Live&liveStreamStatus=Live"
+        //      var videoQuery = "videoType=Live&liveStreamStatus=Live"
         
         func downloadJSON(completed: @escaping () -> ()){
             let url = URL(string: "https://api.overloop.io/org/true/videos?\(videoQuery)")
             
             URLSession.shared.dataTask(with: url!) { (data, response, error) in
                 if error == nil {
+                    utf
                     do{
                         self.videos = try JSONDecoder().decode([Video].self, from: data!)
 //                        print(self.videos)
@@ -70,7 +73,7 @@ class HomeListViewController: UIViewController, UITableViewDelegate, UITableView
                         print(error)
                     }
                 }
-            }.resume()
+                }.resume()
         }
         downloadJSON {
             self.videoList.reloadData()
@@ -82,4 +85,18 @@ class HomeListViewController: UIViewController, UITableViewDelegate, UITableView
         
     }
     
-}
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        getListData()
+        
+        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        getListData()
+    }
+    }
+    
+
+

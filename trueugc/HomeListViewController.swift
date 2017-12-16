@@ -13,7 +13,7 @@ struct Video: Codable {
     var title: String?
     var videoType: String?
     var status: String?
-    var exploitationDate: String?
+    var liveStreamStartedAt: String?
     var liveFeeds: [LiveFeed]?
 }
 
@@ -55,17 +55,16 @@ class HomeListViewController: UIViewController, UITableViewDelegate, UITableView
         
         var videoQuery = "videoType=Live"
         
-        //      var videoQuery = "videoType=Live&liveStreamStatus=Live"
+//              var videoQuery = "videoType=Live&liveStreamStatus=Live"
         
         func downloadJSON(completed: @escaping () -> ()){
             let url = URL(string: "https://api.overloop.io/org/true/videos?\(videoQuery)")
             
             URLSession.shared.dataTask(with: url!) { (data, response, error) in
                 if error == nil {
-                    utf
                     do{
                         self.videos = try JSONDecoder().decode([Video].self, from: data!)
-//                        print(self.videos)
+                        print(self.videos)
                         DispatchQueue.main.async {
                             completed()
                         }                    }

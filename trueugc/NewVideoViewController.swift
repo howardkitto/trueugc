@@ -17,19 +17,23 @@ class NewVideoViewController: UIViewController {
     
     var userEnteredData = Video()
     var returnedData = Video()
+    let now = Date()
+    var timeStamp = String()
+    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let destination = segue.destination as? BroadcastViewController{
             destination.newVideo = returnedData
         }
     }
-
+    
     func submitNewVideo(videoTitle: String, completion:((Error?) -> Void)?) {
         
         self.userEnteredData.title = videoTitle
         self.userEnteredData.videoType = "Live"
         self.userEnteredData.status = "Live"
         
+        self.userEnteredData.liveStreamStartedAt = DateFormatter().string(from: now)
         
         var urlComponents = URLComponents()
             urlComponents.scheme = "https"
@@ -98,6 +102,7 @@ class NewVideoViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
     }
     
 

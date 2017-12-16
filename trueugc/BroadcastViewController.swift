@@ -67,7 +67,6 @@ class BroadcastViewController: UIViewController, UIPickerViewDelegate, UIPickerV
         let streamKey: String? = newVideo?._id!
         
         self.prometheanServerURL = "rtmp://34.212.12.131/live/\(String(describing: streamKey!))"
-//        self.prometheanServerURL = "rtmp://34.212.12.131/live/holymoly"
         self.serverURL = prometheanServerURL
         currentQualityTextField.inputView = qualityPicker
         qualityPicker.delegate = self

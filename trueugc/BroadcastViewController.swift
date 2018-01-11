@@ -23,10 +23,11 @@ class BroadcastViewController: UIViewController, UIPickerViewDelegate, UIPickerV
     @IBOutlet weak var currentQualityTextField: UITextField!
     
     var newVideo:Video?
+    var streamKey: String? = ""
     
     let qualityPicker = UIPickerView()
-    var prometheanServerURL = ""
-    var serverURL = ""
+
+    var serverURL = "34.212.12.131"
     
     var outputQuality = (name: "medium3", setting: LFLiveVideoQuality.medium3)
     
@@ -51,23 +52,11 @@ class BroadcastViewController: UIViewController, UIPickerViewDelegate, UIPickerV
         session.preView = self.previewView
         return session
     }()
-    
-    static func random(_ length: Int = 4) -> String {
-        let base = "abcdefghijklmnopqrstuvwxyz"
-        var randomString: String = ""
-        for _ in 0..<length {
-            let randomValue = arc4random_uniform(UInt32(base.count))
-            randomString += "\(base[base.index(base.startIndex, offsetBy: Int(randomValue))])"
-        }
-        return randomString
-    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        let streamKey: String? = newVideo?._id!
+        streamKey = newVideo?._id!
         
-        self.prometheanServerURL = "rtmp://34.212.12.131/live/\(String(describing: streamKey!))"
-        self.serverURL = prometheanServerURL
         currentQualityTextField.inputView = qualityPicker
         qualityPicker.delegate = self
         currentQualityTextField.text = outputQuality.name
@@ -109,7 +98,8 @@ class BroadcastViewController: UIViewController, UIPickerViewDelegate, UIPickerV
             }
             else{
                 let stream = LFLiveStreamInfo()
-                stream.url = serverURL
+                stream.url = "rtmp://\(serverURL)/live/\(String(describing: streamKey!))"
+                print("connecting to \(String(describing: stream.url))")
                 session.startLive(stream)}
         }
         else{
@@ -120,12 +110,12 @@ class BroadcastViewController: UIViewController, UIPickerViewDelegate, UIPickerV
     
     @IBAction func switchPlatform(_ sender: Any) {
         if platformSwitch.isOn{
-            platformLabel.text = "Promethean"
-            serverURL = prometheanServerURL
+            platformLabel.text = "us-west-1"
+            serverURL = "34.212.12.131"
         }
         else{
-            platformLabel.text = "YouTube"
-            serverURL = "rtmp://a.rtmp.youtube.com/live2/99cu-uuf8-w2zx-9rrs"
+            platformLabel.text = "us-east-1"
+            serverURL = "54.84.196.102"
         }
     }
     

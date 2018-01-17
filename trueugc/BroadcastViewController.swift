@@ -15,9 +15,10 @@ class BroadcastViewController: UIViewController, UIPickerViewDelegate, UIPickerV
     @IBOutlet weak var streamSwitch: UISwitch!
     @IBOutlet weak var infoLabel: UILabel!
     @IBOutlet weak var previewView : UIView!
-    @IBOutlet weak var platformLabel: UILabel!
+//    @IBOutlet weak var platformLabel: UILabel!
     @IBOutlet weak var platformSwitch: UISwitch!
     
+    @IBOutlet weak var tmxSwitch: UISegmentedControl!
     @IBOutlet weak var watchLink: UILabel!
     
     @IBOutlet weak var currentQualityTextField: UITextField!
@@ -26,9 +27,11 @@ class BroadcastViewController: UIViewController, UIPickerViewDelegate, UIPickerV
     var streamKey: String? = ""
     
     let qualityPicker = UIPickerView()
-
-    var serverURL = "34.212.12.131"
     
+    //default to us-east-1
+    var serverURL = "54.84.196.102"
+    
+    //default to lowest quality
     var outputQuality = (name: "low1", setting: LFLiveVideoQuality.low1)
     
     var encodeSettings: [(name : String, setting: LFLiveVideoQuality)] =
@@ -108,16 +111,29 @@ class BroadcastViewController: UIViewController, UIPickerViewDelegate, UIPickerV
         
     }
     
-    @IBAction func switchPlatform(_ sender: Any) {
-        if platformSwitch.isOn{
-            platformLabel.text = "us-west-1"
-            serverURL = "34.212.12.131"
-        }
-        else{
-            platformLabel.text = "us-east-1"
+    @IBAction func switchTmx(_ sender: Any) {
+        
+        switch tmxSwitch.selectedSegmentIndex {
+        case 0:
             serverURL = "54.84.196.102"
+        case 1:
+            serverURL = "34.212.12.131"
+        case 2:
+            serverURL = "54.169.88.136"
+        default:
+            break
         }
     }
+    //    @IBAction func switchPlatform(_ sender: Any) {
+//        if platformSwitch.isOn{
+//            platformLabel.text = "us-west-1"
+//            serverURL = "34.212.12.131"
+//        }
+//        else{
+//            platformLabel.text = "us-east-1"
+//            serverURL = "54.84.196.102"
+//        }
+//    }
     
 }
 

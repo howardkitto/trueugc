@@ -29,7 +29,7 @@ class BroadcastViewController: UIViewController, UIPickerViewDelegate, UIPickerV
 
     var serverURL = "34.212.12.131"
     
-    var outputQuality = (name: "medium3", setting: LFLiveVideoQuality.medium3)
+    var outputQuality = (name: "low1", setting: LFLiveVideoQuality.low1)
     
     var encodeSettings: [(name : String, setting: LFLiveVideoQuality)] =
         [   ("Low1", LFLiveVideoQuality.low1),

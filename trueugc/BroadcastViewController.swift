@@ -17,6 +17,7 @@ class BroadcastViewController: UIViewController{
     @IBOutlet weak var previewView : UIView!
     @IBOutlet weak var watchLink: UILabel!
     @IBOutlet weak var cameraSwitch: UISwitch!
+    @IBOutlet weak var beautyFilter: UISwitch!
     
     var newVideo:Video?
     var videoSettings:VideoSettings?
@@ -31,7 +32,7 @@ class BroadcastViewController: UIViewController{
         
         let session = LFLiveSession(audioConfiguration: audioConfiguration, videoConfiguration: videoConfiguration)!
         session.delegate = self
-//        session.captureDevicePosition = .back
+        session.beautyFace = true
         session.preView = self.previewView
         return session
     }()
@@ -78,6 +79,18 @@ class BroadcastViewController: UIViewController{
             session.captureDevicePosition = .front
         }
     }
+    
+    @IBAction func filterBeauty(_ sender: Any) {
+        
+        if beautyFilter.isOn{
+            session.beautyFace = true
+        }
+        else{
+            session.beautyFace = false
+        }
+    }
+    
+    
 }
 
 extension BroadcastViewController: LFLiveSessionDelegate {

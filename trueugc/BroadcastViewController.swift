@@ -15,9 +15,8 @@ class BroadcastViewController: UIViewController{
     @IBOutlet weak var streamSwitch: UISwitch!
     @IBOutlet weak var infoLabel: UILabel!
     @IBOutlet weak var previewView : UIView!
-    
-//    @IBOutlet weak var tmxSwitch: UISegmentedControl!
     @IBOutlet weak var watchLink: UILabel!
+    @IBOutlet weak var cameraSwitch: UISwitch!
     
     var newVideo:Video?
     var videoSettings:VideoSettings?
@@ -32,7 +31,7 @@ class BroadcastViewController: UIViewController{
         
         let session = LFLiveSession(audioConfiguration: audioConfiguration, videoConfiguration: videoConfiguration)!
         session.delegate = self
-        session.captureDevicePosition = .back
+//        session.captureDevicePosition = .back
         session.preView = self.previewView
         return session
     }()
@@ -68,7 +67,16 @@ class BroadcastViewController: UIViewController{
         else{
             session.stopLive()
         }
-        
+    }
+    
+    //here
+    @IBAction func switchCamera(_ sender: Any) {
+        if cameraSwitch.isOn{
+            session.captureDevicePosition = .back
+        }
+        else{
+            session.captureDevicePosition = .front
+        }
     }
 }
 

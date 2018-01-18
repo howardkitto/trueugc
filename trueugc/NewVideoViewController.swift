@@ -171,6 +171,13 @@ class NewVideoViewController: UIViewController, UIPickerViewDataSource, UIPicker
         super.viewDidLoad()
         self.qualityPicker.delegate = self
         self.qualityPicker.dataSource = self
+        
+        //default video settings (low quality and California)
+        
+        newVideoSettings.qualityLabel = "Low1"
+        newVideoSettings.qualitySetting = LFLiveVideoQuality.low1
+        newVideoSettings.tmxServer = "54.84.196.102"
+        
         qualityPicker.selectRow(0, inComponent: 0, animated: false)
         
         

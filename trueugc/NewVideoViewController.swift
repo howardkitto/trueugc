@@ -7,25 +7,80 @@
 //
 
 import UIKit
+import LFLiveKit
 
+struct VideoSettings{
+    var qualityLabel: String?
+    var qualitySetting : LFLiveVideoQuality?
+    var tmxServer: String?
+}
 
-class NewVideoViewController: UIViewController {
+class NewVideoViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
+    
+    //set up all the vars
     
     @IBOutlet weak var titleTextBox: UITextField!
     
     @IBOutlet weak var validationMessage: UILabel!
     
+    @IBOutlet weak var qualityTextBox: UITextField!
+    
+    @IBOutlet weak var qualityPicker: UIPickerView!
+    
     var userEnteredData = Video()
     var returnedData = Video()
+    var newVideoSettings = VideoSettings()
     let now = Date()
     var timeStamp = String()
+   
+    var encodeSettings: [(qualityLabel : String, qualitySetting: LFLiveVideoQuality)] =
+        [   ("Low1", LFLiveVideoQuality.low1),
+            ("Low2", LFLiveVideoQuality.low2),
+            ("Low3", LFLiveVideoQuality.low3),
+            ("Medium 1", LFLiveVideoQuality.medium1),
+            ("Medium 2", LFLiveVideoQuality.medium2),
+            ("Medium 3", LFLiveVideoQuality.medium3),
+            ("High 1", LFLiveVideoQuality.high1),
+            ("High 2", LFLiveVideoQuality.high2),
+            ("High 3", LFLiveVideoQuality.high3)]
     
+    //video setttings controls
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let destination = segue.destination as? BroadcastViewController{
-            destination.newVideo = returnedData
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return encodeSettings.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return encodeSettings[row].qualityLabel
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+                newVideoSettings.qualityLabel = encodeSettings[row].qualityLabel
+                newVideoSettings.qualitySetting = encodeSettings[row].qualitySetting
+            }
+    //Transmuxer controls
+    
+    @IBOutlet weak var tmxSegCtrl: UISegmentedControl!
+    
+    @IBAction func switchTmx(_ sender: Any) {
+        
+        switch tmxSegCtrl.selectedSegmentIndex {
+        case 0:
+            newVideoSettings.tmxServer = "54.84.196.102"
+        case 1:
+            newVideoSettings.tmxServer = "34.212.12.131"
+        case 2:
+            newVideoSettings.tmxServer = "54.169.88.136"
+        default:
+            break
         }
     }
+
+    
+    //Overloop integration
     
     func submitNewVideo(videoTitle: String, completion:((Error?) -> Void)?) {
         
@@ -85,6 +140,8 @@ class NewVideoViewController: UIViewController {
         }
         task.resume()
     }
+    
+  //Post data to overloop
 
     @IBAction func postNewVideo(_ sender: Any) {
         
@@ -100,8 +157,22 @@ class NewVideoViewController: UIViewController {
             }
         }
     
+    //Move on to broadcast screen
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let destination = segue.destination as? BroadcastViewController{
+            destination.newVideo = returnedData
+            print("videoQuality Label\(String(describing: newVideoSettings.qualityLabel))")
+            destination.videoSettings = newVideoSettings
+        }
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.qualityPicker.delegate = self
+        self.qualityPicker.dataSource = self
+        qualityPicker.selectRow(0, inComponent: 0, animated: false)
+        
         
     }
     

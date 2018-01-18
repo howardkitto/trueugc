@@ -10,44 +10,25 @@ import UIKit
 
 import LFLiveKit
 
-class BroadcastViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
+class BroadcastViewController: UIViewController{
     
     @IBOutlet weak var streamSwitch: UISwitch!
     @IBOutlet weak var infoLabel: UILabel!
     @IBOutlet weak var previewView : UIView!
-//    @IBOutlet weak var platformLabel: UILabel!
-    @IBOutlet weak var platformSwitch: UISwitch!
     
-    @IBOutlet weak var tmxSwitch: UISegmentedControl!
+//    @IBOutlet weak var tmxSwitch: UISegmentedControl!
     @IBOutlet weak var watchLink: UILabel!
     
-    @IBOutlet weak var currentQualityTextField: UITextField!
-    
     var newVideo:Video?
+    var videoSettings:VideoSettings?
     var streamKey: String? = ""
-    
-    let qualityPicker = UIPickerView()
+    var tmxUrl = String()
     
     //default to us-east-1
-    var serverURL = "54.84.196.102"
-    
-    //default to lowest quality
-    var outputQuality = (name: "low1", setting: LFLiveVideoQuality.low1)
-    
-    var encodeSettings: [(name : String, setting: LFLiveVideoQuality)] =
-        [   ("Low1", LFLiveVideoQuality.low1),
-            ("Low2", LFLiveVideoQuality.low2),
-            ("Low3", LFLiveVideoQuality.low3),
-            ("Medium 1", LFLiveVideoQuality.medium1),
-            ("Medium 2", LFLiveVideoQuality.medium2),
-            ("Medium 3", LFLiveVideoQuality.medium3),
-            ("High 1", LFLiveVideoQuality.high1),
-            ("High 2", LFLiveVideoQuality.high2),
-            ("High 3", LFLiveVideoQuality.high3)]
     
     lazy var session: LFLiveSession = {
         let audioConfiguration = LFLiveAudioConfiguration.default()
-        let videoConfiguration = LFLiveVideoConfiguration.defaultConfiguration(for: outputQuality.setting)
+        let videoConfiguration = LFLiveVideoConfiguration.defaultConfiguration(for: (videoSettings?.qualitySetting!)!)
         
         let session = LFLiveSession(audioConfiguration: audioConfiguration, videoConfiguration: videoConfiguration)!
         session.delegate = self
@@ -59,32 +40,11 @@ class BroadcastViewController: UIViewController, UIPickerViewDelegate, UIPickerV
     override func viewDidLoad() {
         super.viewDidLoad()
         streamKey = newVideo?._id!
+        tmxUrl = (videoSettings?.tmxServer!)!
         
-        currentQualityTextField.inputView = qualityPicker
-        qualityPicker.delegate = self
-        currentQualityTextField.text = outputQuality.name
         print("got this \(String(describing: newVideo))")
+        print("outputQuality Label\(String(describing: videoSettings?.qualityLabel!))")
         watchLink.text = newVideo?.title
-    }
-    
-    
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return encodeSettings.count
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return encodeSettings[row].name
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        outputQuality = encodeSettings[row]
-        currentQualityTextField.text=encodeSettings[row].name
-        currentQualityTextField.resignFirstResponder()
-        session.stopLive()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -101,7 +61,7 @@ class BroadcastViewController: UIViewController, UIPickerViewDelegate, UIPickerV
             }
             else{
                 let stream = LFLiveStreamInfo()
-                stream.url = "rtmp://\(serverURL)/live/\(String(describing: streamKey!))"
+                stream.url = "rtmp://\(String(tmxUrl))/live/\(String(describing: streamKey!))"
                 print("connecting to \(String(describing: stream.url))")
                 session.startLive(stream)}
         }
@@ -110,31 +70,6 @@ class BroadcastViewController: UIViewController, UIPickerViewDelegate, UIPickerV
         }
         
     }
-    
-    @IBAction func switchTmx(_ sender: Any) {
-        
-        switch tmxSwitch.selectedSegmentIndex {
-        case 0:
-            serverURL = "54.84.196.102"
-        case 1:
-            serverURL = "34.212.12.131"
-        case 2:
-            serverURL = "54.169.88.136"
-        default:
-            break
-        }
-    }
-    //    @IBAction func switchPlatform(_ sender: Any) {
-//        if platformSwitch.isOn{
-//            platformLabel.text = "us-west-1"
-//            serverURL = "34.212.12.131"
-//        }
-//        else{
-//            platformLabel.text = "us-east-1"
-//            serverURL = "54.84.196.102"
-//        }
-//    }
-    
 }
 
 extension BroadcastViewController: LFLiveSessionDelegate {

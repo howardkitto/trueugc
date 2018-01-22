@@ -32,20 +32,15 @@ class VideoPlayViewController: UIViewController {
     }
     
     @IBAction func playVideo(_ sender: Any) {
-        
-        
-//        guard let url = URL(string: streamUrl!) else {
-//            return
-//        }
 
-//        // Create an AVPlayer, passing it the HTTP Live Streaming URL.
+        // Create an AVPlayer, passing it the HTTP Live Streaming URL.
         let player = AVPlayer(url: streamUrl!)
-//
-//        // Create a new AVPlayerViewController and pass it a reference to the player.
+
+        // Create a new AVPlayerViewController and pass it a reference to the player.
         let controller = AVPlayerViewController()
         controller.player = player
-//
-//        // Modally present the player and call the player's play() method when complete.
+
+        // Modally present the player and call the player's play() method when complete.
         present(controller, animated: true) {
             player.play()
         }
@@ -85,7 +80,6 @@ class VideoPlayViewController: UIViewController {
                         
                         let newURL = self.createURLWithComponents(cmsURL: streamUrl!, cedexisHost: cedexisHost)
                         
-                        print(newURL!)
                         self.streamUrl=newURL!
     
                     }

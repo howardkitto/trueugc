@@ -58,7 +58,7 @@
                                 <color key="backgroundColor" red="0.090196078431372548" green="0.21568627450980393" blue="0.38039215686274508" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="separatorColor" red="0.090196078430000007" green="0.2156862745" blue="0.3803921569" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="ncU-0P-KLs">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="ncU-0P-KLs">
                                         <rect key="frame" x="0.0" y="28" width="368" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ncU-0P-KLs" id="y4K-a6-aDQ">
@@ -74,7 +74,7 @@
                         <color key="backgroundColor" red="0.090196078431372548" green="0.20784313725490194" blue="0.38039215686274508" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="woW-E0-x7n"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Video List" prompt="Promethean UGC v1.0.8" id="JIM-CE-YCS">
+                    <navigationItem key="navigationItem" title="Video List" prompt="Promethean UGC v1.0.10" id="JIM-CE-YCS">
                         <barButtonItem key="rightBarButtonItem" title="Broadcast" id="Tb5-7L-N2C">
                             <connections>
                                 <segue destination="cLn-mK-0wu" kind="show" id="Rtz-Sf-Qe6"/>
@@ -153,9 +153,9 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="USp-bg-9mx">
-                                <rect key="frame" x="182" y="168" width="49" height="31"/>
+                                <rect key="frame" x="184" y="168" width="49" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="onTintColor" red="0.090196078430000007" green="0.2156862745" blue="0.3803921569" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="onTintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
                                     <action selector="filterBeauty:" destination="BYZ-38-t0r" eventType="valueChanged" id="7Oa-e7-ihk"/>
                                 </connections>

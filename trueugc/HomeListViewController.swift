@@ -8,21 +8,6 @@
 
 import UIKit
 
-struct Video: Codable {
-    var _id : String?
-    var title: String?
-    var videoType: String?
-    var status: String?
-    var liveStreamStartedAt: String?
-    var liveFeeds: [LiveFeed]?
-}
-
-struct LiveFeed: Codable {
-    var _id: String?
-    var label: String?
-    var m3u8Url: String?
-}
-
 extension UITableView{
     func setEmptyMessage(_ message: String) {
         let messageLabel = UILabel(frame: CGRect(x: 0, y: 0, width: self.bounds.size.width, height: self.bounds.size.height))
@@ -106,7 +91,7 @@ class HomeListViewController: UIViewController, UITableViewDelegate, UITableView
                 if error == nil {
                     do{
                         self.videos = try JSONDecoder().decode([Video].self, from: data!)
-                        print(self.videos)
+//                        print(self.videos)
                         DispatchQueue.main.async {
                             completed()
                         }                    }

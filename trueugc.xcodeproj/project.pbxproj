@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0215A0881FE2D19D0017910D /* VideoPlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0215A0871FE2D19D0017910D /* VideoPlayViewController.swift */; };
+		0247160E2015F6F800BCF4AA /* model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0247160D2015F6F800BCF4AA /* model.swift */; };
 		026E2B081FE39E120010A17F /* NewVideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026E2B071FE39E120010A17F /* NewVideoViewController.swift */; };
 		026E2B0A1FE3EEEA0010A17F /* junk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026E2B091FE3EEEA0010A17F /* junk.swift */; };
 		02B994941FE1265F00446BCC /* HomeListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B994931FE1265F00446BCC /* HomeListViewController.swift */; };
@@ -42,6 +43,7 @@
 
 /* Begin PBXFileReference section */
 		0215A0871FE2D19D0017910D /* VideoPlayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayViewController.swift; sourceTree = "<group>"; };
+		0247160D2015F6F800BCF4AA /* model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = model.swift; sourceTree = "<group>"; };
 		026E2B071FE39E120010A17F /* NewVideoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewVideoViewController.swift; sourceTree = "<group>"; };
 		026E2B091FE3EEEA0010A17F /* junk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = junk.swift; sourceTree = "<group>"; };
 		02B994931FE1265F00446BCC /* HomeListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeListViewController.swift; sourceTree = "<group>"; };
@@ -132,6 +134,7 @@
 				02BD2C5D1FDADAB800BAD741 /* Assets.xcassets */,
 				02BD2C5F1FDADAB800BAD741 /* LaunchScreen.storyboard */,
 				02BD2C621FDADAB800BAD741 /* Info.plist */,
+				0247160D2015F6F800BCF4AA /* model.swift */,
 			);
 			path = trueugc;
 			sourceTree = "<group>";
@@ -475,6 +478,7 @@
 				026E2B081FE39E120010A17F /* NewVideoViewController.swift in Sources */,
 				02BD2C591FDADAB800BAD741 /* BroadcastViewController.swift in Sources */,
 				02BD2C571FDADAB800BAD741 /* AppDelegate.swift in Sources */,
+				0247160E2015F6F800BCF4AA /* model.swift in Sources */,
 				026E2B0A1FE3EEEA0010A17F /* junk.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

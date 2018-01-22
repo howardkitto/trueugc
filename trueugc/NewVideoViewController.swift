@@ -9,11 +9,11 @@
 import UIKit
 import LFLiveKit
 
-struct VideoSettings{
-    var qualityLabel: String?
-    var qualitySetting : LFLiveVideoQuality?
-    var tmxServer: String?
-}
+//struct VideoSettings{
+//    var qualityLabel: String?
+//    var qualitySetting : LFLiveVideoQuality?
+//    var tmxServer: String?
+//}
 
 class NewVideoViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
     

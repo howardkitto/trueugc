@@ -20,6 +20,7 @@ class VideoPlayViewController: UIViewController {
     
     var streamUrl :String?
     
+    var cedexisDecision = CedexisCall()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,8 +29,8 @@ class VideoPlayViewController: UIViewController {
         
         VideoTitle.text = video?.title
         
-        streamUrlLabel.text = streamUrl
-
+        callCedexis()
+        
     }
     
     @IBAction func playVideo(_ sender: Any) {
@@ -49,9 +50,29 @@ class VideoPlayViewController: UIViewController {
         present(controller, animated: true) {
             player.play()
         }
-        
     }
-
     
+    func callCedexis(){
+        
+        func getBestCDN(completed: @escaping ()->()){
+            let url = URL(string : "https://hopx.cedexis.com/zones/1/customers/54877/apps/1/decision/" )
+            
+            URLSession.shared.dataTask(with: url!){(data, response, error)in
+                if error == nil {
+                    do{
+                        self.cedexisDecision = try
+                            JSONDecoder().decode(CedexisCall.self, from: data!)
+                        print(self.cedexisDecision.providers![0].provider!)
+                    }
+                    catch{
+                        print(error)
+                    }
+                }
+            }.resume()
+        }
+        getBestCDN {
+
+        }
+    }
 
 }

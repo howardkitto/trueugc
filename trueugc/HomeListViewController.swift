@@ -35,13 +35,6 @@ class HomeListViewController: UIViewController, UITableViewDelegate, UITableView
     var videoQuery = "videoType=Live&liveStreamStatus=Live&orderBy=liveStreamStartedAt"
     
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let destination = segue.destination as? VideoPlayViewController{
-            destination.video = videos[(videoList.indexPathForSelectedRow?.row)!]
-        }
-    }
-    
-    
     @IBOutlet weak var videoList: UITableView!
     
     @IBOutlet weak var videoTypeSwitch: UISwitch!
@@ -52,6 +45,7 @@ class HomeListViewController: UIViewController, UITableViewDelegate, UITableView
         getListData()
         
     }
+    
     
     @IBAction func toggleVideoType(_ sender: Any) {
         if(videoTypeSwitch.isOn){
@@ -115,6 +109,12 @@ class HomeListViewController: UIViewController, UITableViewDelegate, UITableView
         
         getListData()
         
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let destination = segue.destination as? VideoPlayViewController{
+            destination.video = videos[(videoList.indexPathForSelectedRow?.row)!]
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {

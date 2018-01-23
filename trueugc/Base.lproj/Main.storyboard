@@ -58,7 +58,7 @@
                                 <color key="backgroundColor" red="0.090196078431372548" green="0.21568627450980393" blue="0.38039215686274508" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="separatorColor" red="0.090196078430000007" green="0.2156862745" blue="0.3803921569" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="ncU-0P-KLs">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="videoLink" id="ncU-0P-KLs">
                                         <rect key="frame" x="0.0" y="28" width="368" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ncU-0P-KLs" id="y4K-a6-aDQ">
@@ -329,6 +329,7 @@
                     <navigationItem key="navigationItem" title="Play Video" id="EPa-Wo-CWr"/>
                     <connections>
                         <outlet property="VideoTitle" destination="4OC-ag-5QJ" id="It2-g3-HNf"/>
+                        <outlet property="playButton" destination="zBG-73-dRy" id="AFg-VB-ldV"/>
                         <outlet property="streamUrlLabel" destination="KEY-g7-j11" id="9li-Xi-WJe"/>
                     </connections>
                 </viewController>
@@ -374,8 +375,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="d7i-Aq-YH6"/>
-        <segue reference="jTZ-3X-54N"/>
+        <segue reference="urg-yv-9iL"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>

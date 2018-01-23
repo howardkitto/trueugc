@@ -16,6 +16,8 @@ class VideoPlayViewController: UIViewController {
     
     @IBOutlet weak var streamUrlLabel: UILabel!
     
+    @IBOutlet weak var playButton: UIButton!
+    
     var video:Video?
     
     var streamUrl :URL?
@@ -26,6 +28,8 @@ class VideoPlayViewController: UIViewController {
         super.viewDidLoad()
         
         VideoTitle.text = video?.title
+        
+        self.playButton.isHidden=true
         
         getBestCDN()
         
@@ -73,7 +77,12 @@ class VideoPlayViewController: UIViewController {
                         self.cedexisDecision = try
                             JSONDecoder().decode(CedexisCall.self, from: data!)
                         let cedexisProvider = self.cedexisDecision.providers![0].provider!
-                        DispatchQueue.main.async(execute: {self.streamUrlLabel.text = cedexisProvider})
+                        
+                        //change the UI when Cedexis returns data
+                        DispatchQueue.main.async(execute: {
+                                self.streamUrlLabel.text=cedexisProvider
+                                self.playButton.isHidden=false
+                        })
                         
                         let streamUrl = self.video?.liveFeeds![0].m3u8Url!
                         let cedexisHost = self.cedexisDecision.providers![0].host!

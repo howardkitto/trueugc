@@ -150,14 +150,20 @@ class NewVideoViewController: UIViewController, UIPickerViewDataSource, UIPicker
             }
             }
         }
-    
-    //Move on to broadcast screen
+
+    //Need to show brpadcast view as modal and pass data through a Navigation Controller
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let destination = segue.destination as? BroadcastViewController{
-            destination.newVideo = returnedData
-            print("videoQuality Label\(String(describing: newVideoSettings.qualityLabel))")
-            destination.videoSettings = newVideoSettings
-        }
+        
+        if segue.identifier == "startBroadcast"  {
+            
+            if let navController = segue.destination as? UINavigationController {
+                
+                if let childVC = navController.topViewController as? BroadcastViewController {
+                    childVC.newVideo = returnedData
+                    childVC.videoSettings = newVideoSettings
+                }
+            }
+        }        
     }
     
     

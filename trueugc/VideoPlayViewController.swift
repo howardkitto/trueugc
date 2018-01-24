@@ -57,9 +57,10 @@ class VideoPlayViewController: UIViewController {
         
         var returnURLString = String()
         
-        if(self.cedexisDecision.providers![0].provider!=="fastly_cdn"){
+        if(self.cedexisDecision.providers![0].provider!=="fastly_ssl"){
             //this is an awful hack
             returnURLString = "\(cedexisHost)/video-true-ugc.promethean.tv\(videoPath)"
+//            print(returnURLString)
         }
         else{returnURLString = "\(cedexisHost)\(videoPath)"}
         
@@ -69,7 +70,7 @@ class VideoPlayViewController: UIViewController {
     }
     
     func getBestCDN(){
-            let cedexisUrl = URL(string : "https://hopx.cedexis.com/zones/1/customers/54877/apps/1/decision/" )
+            let cedexisUrl = URL(string : "https://hopx.cedexis.com/zones/1/customers/54877/apps/1/decision/")
             
             URLSession.shared.dataTask(with: cedexisUrl!){(data, response, error)in
                 if error == nil {
@@ -77,23 +78,22 @@ class VideoPlayViewController: UIViewController {
                         self.cedexisDecision = try
                             JSONDecoder().decode(CedexisCall.self, from: data!)
                         let cedexisProvider = self.cedexisDecision.providers![0].provider!
+                        let cedexisHost = self.cedexisDecision.providers![0].host!
+                        let streamUrl = self.video?.liveFeeds![0].m3u8Url!
+                        let newURL = self.createURLWithComponents(cmsURL: streamUrl!, cedexisHost: cedexisHost)
+
+                        self.streamUrl=newURL!
                         
                         //change the UI when Cedexis returns data
                         DispatchQueue.main.async(execute: {
-                                self.streamUrlLabel.text=cedexisProvider
-                                self.playButton.isHidden=false
+                            self.streamUrlLabel.text=cedexisProvider
+                            self.playButton.isHidden=false
+//                            print(cedexisHost)
                         })
-                        
-                        let streamUrl = self.video?.liveFeeds![0].m3u8Url!
-                        let cedexisHost = self.cedexisDecision.providers![0].host!
-                        
-                        let newURL = self.createURLWithComponents(cmsURL: streamUrl!, cedexisHost: cedexisHost)
-                        
-                        self.streamUrl=newURL!
-    
+
                     }
                     catch{
-                        print(error)
+                        print("this error \(error)")
                     }
                 }
             }.resume()

@@ -248,7 +248,6 @@
                                 <rect key="frame" x="144" y="221" width="250" height="29"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <segments>
-                                    <segment title="California"/>
                                     <segment title="Virginia"/>
                                     <segment title="Singapore"/>
                                 </segments>

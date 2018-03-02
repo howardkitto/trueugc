@@ -63,11 +63,11 @@ class NewVideoViewController: UIViewController, UIPickerViewDataSource, UIPicker
         
         switch tmxSegCtrl.selectedSegmentIndex {
         case 0:
+            //virginia
             newVideoSettings.tmxServer = "54.84.196.102"
         case 1:
-            newVideoSettings.tmxServer = "34.212.12.131"
-        case 2:
-            newVideoSettings.tmxServer = "54.169.88.136"
+            //singapore
+            newVideoSettings.tmxServer = "13.250.125.180"
         default:
             break
         }
